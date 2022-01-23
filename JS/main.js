@@ -72,6 +72,7 @@ $('#city-selection-btn').on('click',function(){
         // Turn on loader
         TurnOnLoader();
 
+
         setTimeout(() => {
             TurnOffLoader();
             showCityResult();
@@ -117,7 +118,7 @@ $('.indicator div').on('click', function(e){
 
 
 // ============== Auto Complete City Selection ==============
-const numberCity = 5;
+
 
 $('.city-selection input').keydown(async function(){
     let keyword = $(this).val();
@@ -129,7 +130,7 @@ $('.city-selection input').keydown(async function(){
 
     //filter 5 closest result
     if(result.count > 0){
-        let filteredResult = filterCityResult(result, numberCity);
+        let filteredResult = filterCityResult(result);
         displaySuggestion($(this), filteredResult);
     }
 

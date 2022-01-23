@@ -1,4 +1,5 @@
 const CitybyNameURL = 'https://api.teleport.org/api/cities/?search=';
+const numberCity = 5;
 let FindCitybyName = async (keyword) => {
     let destination = CitybyNameURL + keyword;
     try{
@@ -13,11 +14,15 @@ let FindCitybyName = async (keyword) => {
     }
 }
 
-let filterCityResult = (resultSet, numberCity) => {
+let filterCityResult = (resultSet) => {
+    let length = resultSet.count;
     let filteredResult = [];
-    for(let i=0; i <5; i++){
-        let result = resultSet._embedded['city:search-results'][i];
-        filteredResult.push(result);
+    for(let i=0; i <length; i++){
+        if(i<=numberCity){
+            let result = resultSet._embedded['city:search-results'][i];
+            filteredResult.push(result);    
+        }
+        else break;
     }
 
     return filteredResult

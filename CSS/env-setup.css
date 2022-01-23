@@ -1,0 +1,54 @@
+/* ========= Font==================== */
+@font-face {
+    font-family: RetroRemember;
+    src: url('../Font/RetroRemembers.ttf');
+}
+
+@font-face {
+    font-family: RetroRemember;
+    src: url('../Font/RetroRemembersItalic.ttf');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url('../Font/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url('../Font/OpenSans-Bold.ttf');
+    font-weight: bold;
+}
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+:root{
+    /* =========== Color Scheme============ */
+    --darkgreen: #006d77;
+    --lightgreen: #83c5be;
+    --lightbrown: #ffddd2;
+    --darkbrown: #e29578;
+}
+
+/* ========= Font Size ============ */
+
+body,html{
+    font-size: 5vw;
+    font-family: OpenSans;
+}
+
+
+@media screen and (min-width: 768px){
+    body,html{
+        font-size: 4vw;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    body,html{
+        font-size: 1.5vw;
+    }
+}

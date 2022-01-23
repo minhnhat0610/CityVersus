@@ -1,0 +1,530 @@
+@import url(../CSS/env-setup.css);
+/* ================ Html and Body =============== */
+html,body{
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+/* ========== Landing Background =========== */
+.background{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.animation-container{
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5% 0%;
+}
+
+.animation-container:first-of-type{
+    align-items: flex-end;
+}
+
+        .animation-container span{
+            font-size: 5rem;
+            font-family: RetroRemember;
+            font-style: italic;
+            background: linear-gradient(0deg, rgba(226,149,120,1) 0%, rgba(226,149,120,1) 35%, rgba(255,255,255,1) 45%, rgba(226,149,120,1) 55%, rgba(226,149,120,1) 100%);            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0% 5%;
+            text-shadow:
+                4.1px 3.7px 3.8px rgba(0, 0, 0, 0.02),
+                9.9px 8.8px 9.2px rgba(0, 0, 0, 0.028),
+                18.7px 16.7px 17.3px rgba(0, 0, 0, 0.035),
+                33.3px 29.7px 30.8px rgba(0, 0, 0, 0.042),
+                62.2px 55.6px 57.7px rgba(0, 0, 0, 0.05),
+                149px 133px 138px rgba(0, 0, 0, 0.07)
+                ;
+            -webkit-text-stroke-color: rgb(255, 255, 255);
+            -webkit-text-stroke-width: 1px;
+            transition: transform 1.5s cubic-bezier(0.155, 0.765, 1.000, 0.170);;
+        }
+
+        .animation1{
+            transform: translateX(-200%);
+        }
+
+        .animation2{
+            transform: translateX(200%);
+        }
+
+.divider{
+    height: 1%;
+    width: 100%;
+    display: flex;
+    background-color: var(--lightgreen);
+    overflow: hidden;
+
+}
+        .divider div:first-child{
+            width:50%;
+            height: 100%;
+            background-color: var(--darkgreen);
+            transform-origin: right top;
+            transform: skewX(-20deg);
+        }
+
+
+/* ========= Body Content =========== */
+.body-content{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.city-container{
+    height: 50%;
+    width: 100%;
+    position: relative;
+    transition: transform 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 1.5s;
+}
+
+.city-container:first-child{
+    background-color: var(--darkgreen);
+    transform: translateY(-100%);
+}
+
+.city-container:nth-child(2){
+    background-color: var(--lightgreen);
+    transform: translateY(100%);
+}
+
+.show-city-container{
+    transform: none !important;
+}
+
+.city-divider{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.city-divider span{
+    font-size: 4rem;
+    font-family: RetroRemember;
+    font-style: italic;
+    background: linear-gradient(0deg, rgba(226,149,120,1) 0%, rgba(226,149,120,1) 35%, rgba(255,255,255,1) 45%, rgba(226,149,120,1) 55%, rgba(226,149,120,1) 100%);            -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0% 5%;
+    text-shadow: 0px 0px 60px rgb(255, 255, 255);
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1px;
+    transform: scale(0,0);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.5) 2.5s;
+}
+
+.onloading{
+    z-index: 10;
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
+.loader{
+    animation: loading 1s ease-in-out infinite forwards;
+}
+
+.finishedloading{
+    animation: none !important;
+    transform: scale(0,0) !important;
+}
+
+@keyframes loading {
+    0%{
+        transform: scale(1,1);
+        opacity: 1;
+    }
+
+    50%{
+        transform: scale(0.9,0.9);
+        opacity: 0.5;
+    }
+
+    100%{
+        transform: scale(1,1);
+        opacity: 1;
+    }
+}
+
+/* ================== City Selection =============== */
+.city-selection{
+    width: 100%;
+    height: 100%; 
+    position: relative;
+    z-index: 3;
+    transition: opacity 0.5s ease-in-out 3s;
+    opacity: 0;
+    pointer-events: none;
+}
+.show-city-selection{
+    opacity: 0;
+    pointer-events: none;
+}
+.city-selection form, .city-selection fieldset{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.city-selection label{
+    color: white;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.city-selection input{
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    color: var(--lightbrown);
+    padding: 0% 5%;
+    width: 80%;
+    text-transform: capitalize;
+    background: rgba( 255, 255, 255, 0.2 );
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    margin-bottom: 10%;
+
+}
+
+.city-selection input:focus{
+    outline: none;
+    box-shadow: 0px 0px 80px rgb(255, 255, 255);
+}
+
+.control-button{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10% 0px;
+    opacity: 0;
+    transform: translateY(10%);
+    transition: 0.5s ease-in-out 3s;
+}
+
+.show-control-button{
+    transform: none;
+    opacity: 1;
+}
+
+.control-button button{
+    background-color: #e63946;
+    color: white;
+    padding: 0.1rem 3rem;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 5;
+    transform: skewX(-20deg);
+}
+
+/* ============== City Result ================ */
+.city-result{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: var(--darkgreen);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.city-container:nth-child(2) .city-result{
+    background-color: var(--lightgreen);
+}
+
+.city-banner{
+    height: 15%;
+    width: 100%;
+    background-image: url(../DemoPhotos/Louisville-KY.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: local;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow:
+    0px 3.8px 4px rgba(0, 0, 0, 0.017),
+    0px 9.2px 9.5px rgba(0, 0, 0, 0.024),
+    0px 17.3px 17.9px rgba(0, 0, 0, 0.03),
+    0px 30.8px 31.9px rgba(0, 0, 0, 0.036),
+    0px 57.7px 59.7px rgba(0, 0, 0, 0.043),
+    0px 138px 143px rgba(0, 0, 0, 0.06)
+  ;
+}
+
+.city-container:nth-child(2) .city-banner{
+    background-image: url(../DemoPhotos/Indianapolis-IN.jpg);
+
+}
+
+.city-banner::after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+    .city-name {
+        text-align: center;
+        color: white;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: bold;
+        z-index: 4;
+    }
+
+/* ======== Information Slider =========== */
+.infor-slider{
+    height: 70%;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    overflow:visible;
+    z-index: 4;
+    transition: 1s ease-in-out;
+}
+
+    .infor-slider > div {
+        min-width: 100%;
+        height: auto;
+        padding: 3%;
+        overflow-y: auto;
+    }
+
+    /* Basic Information */
+    .basic-infor{
+    }
+
+        .slide-title{
+            color: white;
+            text-transform: capitalize;
+            font-size: 1.3rem;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .slide-title::after{
+            content: "";
+            width: 70px;
+            height: 2px;
+            border-radius: 50px;
+            background-color: var(--darkbrown);
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+        }
+
+        .row{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0% 5%;
+            margin: 5% 0%;
+        }
+
+        .row label{
+            color: white;
+            text-transform: capitalize;
+            font-size: 1rem;
+        }
+
+        .row input{
+            background-color: transparent;
+            border: none;
+            color: var(--lightbrown);
+            text-transform: capitalize;
+            font-size: 1.2rem;
+            margin-left: 20%;
+            font-style: italic;
+        }
+
+
+    /* City Score */
+
+        .score-container{
+            width: 100%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            padding-left: 3%;
+        }
+
+        .score-bar{
+            width: 70%;
+            height: 10px;
+            background-color: white;
+            border-radius: 50px;
+        }
+
+        .score-bar div{
+            border-radius: 50px;
+            width: 20%;
+            height: 100%;
+            background-color: #F3C32C;
+        }
+        .score{
+            width: 30%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score span{
+            color: white;
+        }
+/* =========== Slide Indicator ===========*/
+.indicator{
+    height: 15%;
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+
+.indicator div{
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.current-slide{
+    background-color: white;
+
+}
+
+@media screen and (min-width: 1024px){
+    .background{
+        flex-direction: row;
+    }
+
+    .animation-container{
+        height: 100%;
+        width: 50%;
+        padding: 0px;
+        align-items: center !important;
+    }
+
+    .animation-container:first-child span{
+        margin-top: -30%;
+    }
+
+    .animation-container:last-child span{
+        margin-top: 30%;
+    }
+
+    .divider{
+        height: 100%;
+        width: 0.5%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .divider div:first-child{
+        height: 55%;
+        width: 100%;
+        transform: skewY(20deg);
+    }
+
+    .finishedloading{
+        transform: scale(1,1) !important;
+    }
+
+    /* ============ Body Content ========== */
+    .body-content{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .city-container{
+        height: 100%;
+        width: 50%;
+    }
+
+    /* ========= City Selection ============= */
+    .city-selection input{
+        width: 60%;
+    }
+
+
+
+    /* ======== City Result ============ */
+    .city-container:nth-child(2) .slide-title{
+        text-align: right;
+    }
+
+    .city-container:nth-child(2) .slide-title::after{
+        right: 0px;
+        left: auto;
+    }
+
+    .city-container:nth-child(2) .basic-infor{
+        padding-left: 10%;
+    }
+    .row{
+        flex-direction: row;
+    }
+
+    .city-container:nth-child(2) .city-score .row, .city-container:nth-child(2) .city-score .score-container{
+        flex-direction: row-reverse;
+    }
+
+    .city-container:nth-child(2) .city-score label{
+        text-align: right;
+    }
+
+    .row label{
+        width: 40%;
+    }
+
+    .row input{
+        width: 60%;
+        margin-left: 0%;
+    }
+
+}
+
+

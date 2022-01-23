@@ -29,7 +29,13 @@
                 <form>
                     <fieldset>
                         <label for="city1">Pick a City</label>
-                        <input type="text" id="city1" name="city1" required>
+                        <div>
+                             <input type="text" id="city1" name="city1" required>
+                            <ul class="suggestion">
+
+                            </ul>
+                        </div>
+                       
                     </fieldset>
                 </form>
             </div>
@@ -135,6 +141,11 @@
                     <div></div>
                 </div>
             </div>
+
+
+            <div class="vote">
+                <i class="far fa-times-circle"></i>
+            </div>
         </div>
 
         <div class="city-container">
@@ -142,7 +153,12 @@
                 <form>
                     <fieldset>
                         <label for="city2">Pick a City</label>
-                        <input type="text" id="city2" name="city2" required>
+                        <div>
+                            <input type="text" id="city2" name="city2" required>
+                           <ul class="suggestion">
+
+                           </ul>
+                       </div>  
                     </fieldset>
                 </form>
             </div>
@@ -250,20 +266,25 @@
                     <div></div>
                 </div>
             </div>
+
+            <div class="vote">
+                <i class="far fa-times-circle"></i>  
+            </div>
         </div>
 
         <div class="control-button">
-            <button type="button">go</button>
+            <button type="button" id="city-selection-btn">go</button>
+            <button class="hide-btn" type="button" id="city-vote-btn">vote</button>
         </div>
 
         <div class="city-divider">
-            <span class="finishedloading">vs</span>
+            <span class="">vs</span>
         </div>
     </section>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/e23e09cf11.js" crossorigin="anonymous"></script>
-<script src="JS/main.js"></script>
+<script src="JS/main.js" type="module"></script>
 </body>
 </html>

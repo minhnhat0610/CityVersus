@@ -129,6 +129,7 @@ html,body{
     -webkit-text-stroke-width: 1px;
     transform: scale(0,0);
     transition: 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.5) 2.5s;
+    z-index: 10;
 }
 
 .onloading{
@@ -171,10 +172,14 @@ html,body{
     transition: opacity 0.5s ease-in-out 3s;
     opacity: 0;
     pointer-events: none;
+
 }
-.show-city-selection{
-    opacity: 0;
-    pointer-events: none;
+.show-city{
+    opacity: 1 !important;
+    pointer-events: visible !important;
+}
+.remove-delay{
+    transition-delay: 0s;
 }
 .city-selection form, .city-selection fieldset{
     width: 100%;
@@ -194,6 +199,15 @@ html,body{
     margin-bottom: 10%;
 }
 
+.city-selection div{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
 .city-selection input{
     background-color: transparent;
     border: 2px solid white;
@@ -206,13 +220,38 @@ html,body{
     background: rgba( 255, 255, 255, 0.2 );
     backdrop-filter: blur( 20px );
     -webkit-backdrop-filter: blur( 20px );
-    margin-bottom: 10%;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
 .city-selection input:focus{
     outline: none;
     box-shadow: 0px 0px 80px rgb(255, 255, 255);
+}
+
+.city-selection ul{
+    width: 80%;
+    height: auto;
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+
+
+.city-selection li{
+    background-color: white;
+    border: none;
+    padding: 0% 5%;
+    cursor: pointer;
+}
+
+.city-selection li:hover{
+    background-color: var(--darkbrown);
+    color: white;
 }
 
 .control-button{
@@ -235,7 +274,6 @@ html,body{
 }
 
 .control-button button{
-    background-color: #e63946;
     color: white;
     padding: 0.1rem 3rem;
     text-transform: capitalize;
@@ -245,6 +283,18 @@ html,body{
     cursor: pointer;
     z-index: 5;
     transform: skewX(-20deg);
+}
+
+#city-selection-btn{
+    background-color: #e63946;
+}
+
+#city-vote-btn{
+    background-color: var(--darkbrown);
+}
+
+.hide-btn{
+    display: none;
 }
 
 /* ============== City Result ================ */
@@ -258,6 +308,29 @@ html,body{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out 0.5s;
+}
+
+.winning-city{
+    animation: winning 1s ease-in-out 1 forwards;
+}
+
+@keyframes winning {
+    0%{
+        box-shadow: inset 0px 0px 0px #ffd500;
+    }
+
+    50%{
+        box-shadow: inset 0px 0px 60px #ffd500;
+
+    }
+
+    100%{
+        box-shadow: inset 0px 0px 0px #ffd500;
+
+    }
 }
 
 .city-container:nth-child(2) .city-result{
@@ -414,7 +487,6 @@ html,body{
 .indicator{
     height: 15%;
     width: 100%;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -434,6 +506,41 @@ html,body{
 .current-slide{
     background-color: white;
 
+}
+
+
+/* ========== Vote ============= */
+.vote{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.show-vote{
+    display: flex;
+}
+
+.vote:hover{
+    opacity: 1;
+}
+
+.vote i {
+    font-size: 5rem;
+    color: #e63946;
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1px;
 }
 
 @media screen and (min-width: 1024px){
@@ -485,7 +592,7 @@ html,body{
     }
 
     /* ========= City Selection ============= */
-    .city-selection input{
+    .city-selection input, .city-selection ul{
         width: 60%;
     }
 

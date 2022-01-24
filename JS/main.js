@@ -1,4 +1,5 @@
 import{FindCitybyName, filterCityResult, displaySuggestion} from './autoComplete.js';
+import{fetchCityData} from './fetchCityData.js';
 $(document).ready(function(){
 // ========= Landing animation ===========
 let runLandingAnimation = () => {
@@ -66,12 +67,15 @@ let checkValidity = () => {
 
     return pass;
 }
-$('#city-selection-btn').on('click',function(){
+$('#city-selection-btn').on('click',async function(){
     // Check City selsection input validity
     if(checkValidity()){
         // Turn on loader
         TurnOnLoader();
 
+        // get Cities full name
+        fetchCityData();
+       
 
         setTimeout(() => {
             TurnOffLoader();

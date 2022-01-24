@@ -448,6 +448,10 @@ html,body{
             font-style: italic;
         }
 
+        .row input:focus{
+            outline: none;
+        }
+
 
     /* City Score */
 
@@ -482,6 +486,7 @@ html,body{
 
         .score span{
             color: white;
+            font-weight: bold;
         }
 /* =========== Slide Indicator ===========*/
 .indicator{
@@ -596,6 +601,9 @@ html,body{
         width: 60%;
     }
 
+    .control-button{
+        padding: 3% 0%;
+    }
 
 
     /* ======== City Result ============ */

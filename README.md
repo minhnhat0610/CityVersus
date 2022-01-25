@@ -1,9 +1,11 @@
 # City Versus
 
+
 ## Introduction
 City Versus is a web-app that allow client to pick their two favorite cities and compare them\
 The app will show geographic information including state, country, timezone, urban area, population, and a brief description about the cities.\
-The cities are ranked base on the various data points provided by [Teleport API](https://developers.teleport.org/api/). The app will determine a winning city which is the one with higher Teleport-score.
+The cities are ranked base on the various data points provided by [Teleport API](https://developers.teleport.org/api/). The app will determine a winning city which is the one with higher Teleport-score.\
+Direct Link: https://minhnhat0610.github.io/CityVersus/
 
 ## Technology Use
 - HTML

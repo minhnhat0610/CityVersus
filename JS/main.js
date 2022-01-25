@@ -1,6 +1,8 @@
-import{FindCitybyName, filterCityResult, displaySuggestion} from './autoComplete.js';
+import{FindCitybyName, filterCityResult, displaySuggestion, ChangeCityBanner} from './autoComplete.js';
 import{fetchCityData} from './fetchCityData.js';
 $(document).ready(function(){
+//=========== Global Varible ====================
+let imgSource = [];
 // ========= Landing animation ===========
 let runLandingAnimation = () => {
     $('.animation-container span').eq(0).addClass('animation2');
@@ -54,6 +56,7 @@ let TurnOffVote = () => {
   
 }
 
+
 //  ============== Check input Validity =============
 let checkValidity = () => {
     const count = $('.city-selection').length;
@@ -74,31 +77,75 @@ $('#city-selection-btn').on('click',async function(){
         TurnOnLoader();
 
         // get Cities full name
-        fetchCityData();
-       
-
-        setTimeout(() => {
-            TurnOffLoader();
+        if(await fetchCityData()){
             showCityResult();
+            ChangeCityBanner();
             TurnOnVote();
-        }, 2000);
+        }
        
+        else{
+            alert("Please check your city!");
+        }
+
+        // Turn off loader
+        TurnOffLoader();
+
 
     }
 })
 
+//============= Final Winning city ==============
+let findWinningCity = () =>{
+    let winScore = parseFloat($('.city-final-score').eq(0).html());
+    let winningPos = 0;
+    $('.city-final-score').each(function(index){
+        let currentScore = parseFloat($(this).html());
+        if(currentScore > winScore){
+            winScore = currentScore;
+            winningPos = index;
+        
+        }
+    })
+
+    return winningPos;
+}
+
+//  ================ Highlight Winning City ============
+let highWinningCity = (winningPos) => {
+    //highlight the container
+    $('.city-result').eq(winningPos).addClass('winning-city');
+
+    //highlight the score
+    $('.city-final-score').eq(winningPos).addClass('winning-score');
+}
+
 // ============ Vote button click ================
-$('#city-vote-btn').on('click',function(){
-    // show vote option
+$('#city-vote-btn').on('click',async function(){
+    // show final score
     $('.vote').addClass('show-vote');
+
+    // find the winning city
+    let winningPos = findWinningCity();
+    //highlight wining city
+    highWinningCity(winningPos);
+
+    //prompt user
+    let WinningCityName = await $('.city-name').eq(winningPos).text();
+    
+    setTimeout(() => {
+        let confirmAction = confirm(`${WinningCityName} won! \n Do you want another round?`);
+    if(confirmAction){
+        location.reload();
+    }
+    else{
+        $('.vote').removeClass('show-vote');
+
+    }
+    }, 500);
 })
-// =========== Final vote click ===========
-$('.vote').on('click',function(e){
-    let lossingCity = $(e.currentTarget).parents('.city-container');
-    let winningCity = lossingCity.siblings('.city-container');
-    // Highlight winning city;
-    winningCity.children('.city-result').addClass('winning-city');
-})
+
+
+
 
 
 
@@ -143,6 +190,7 @@ $('.city-selection input').keydown(async function(){
         $(this).siblings(".suggestion").html("");
     }
 })
+
 
 
 

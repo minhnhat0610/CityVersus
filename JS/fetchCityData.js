@@ -91,36 +91,67 @@ let displayCityScore = (urbanResult, index) => {
     
 }
 
-let changeCityBannerImage = (urbanImageResult, index) => {
+
+
+let getCityImage = async (cityName) => {
+    let citylink = await getCityItemLinks(cityName);
+    let cityResult = await findCityInfor(citylink);
+    let urbanLink = cityResult._links['city:urban_area'].href;
+    let urbanResult = await findCityInfor(urbanLink);
+
+    let urbanImageLink = urbanResult._links['ua:images'].href;
+    let urbanImageResult = await findCityInfor(urbanImageLink);
+
     let webImage = urbanImageResult.photos[0].image.web;
     let mobilImage = urbanImageResult.photos[0].image.mobile;
-    $('.city-banner').eq(index).css({
-        backgroundImage: `url(${webImage})`
-    })
+
+    return {web: webImage, mobile: mobilImage};
+
+}
+
+let displayCityFinalScore = (urbanScroreResult,index) => {
+    let cityFinalScore = urbanScroreResult.teleport_city_score.toFixed(1);
+
+    $('.city-final-score').eq(index).text(cityFinalScore);
+}
+
+let displaySummary = (urbanScroreResult,index) =>{
+    let summary = urbanScroreResult.summary;
+    $('.summary-detail').eq(index).html(summary);
 }
 
 
+
 let fetchCityData = async () =>{
-    for(let i = 0 ;i <2 ;i ++){
-        let CityNameList = getCityFullName();
-        let citylink = await getCityItemLinks(CityNameList[i]);
-        let cityResult = await findCityInfor(citylink);
-        let cityBasicInfor = await  ExtractBasicInfor(cityResult);
+    try{
+        for(let i = 0 ;i <2 ;i ++){
+            let CityNameList = getCityFullName();
+            let citylink = await getCityItemLinks(CityNameList[i]);
+            let cityResult = await findCityInfor(citylink);
+            let cityBasicInfor = await  ExtractBasicInfor(cityResult);
+    
+            let urbanLink = cityResult._links['city:urban_area'].href;
+            let urbanResult = await findCityInfor(urbanLink);
+            let urbanScoreLink = urbanResult._links['ua:scores'].href;
+            let urbanScroreResult = await findCityInfor(urbanScoreLink);
 
-        let urbanLink = cityResult._links['city:urban_area'].href;
-        let urbanResult = await findCityInfor(urbanLink);
-        let urbanScoreLink = urbanResult._links['ua:scores'].href;
-        let urbanScroreResult = await findCityInfor(urbanScoreLink);
+            console.log(urbanScroreResult);
+    
+            displayBasicData(cityBasicInfor,i);
+            displayCityScore(urbanScroreResult,i);
+            displaySummary(urbanScroreResult,i);
+            displayCityFinalScore(urbanScroreResult,i);
+        }
 
-        let urbanImageLink = urbanResult._links['ua:images'].href;
-        let urbanImageResult = await findCityInfor(urbanImageLink);
+        return true;
+    
+    }
 
-
-        displayBasicData(cityBasicInfor,i);
-        displayCityScore(urbanScroreResult,i);
-        changeCityBannerImage(urbanImageResult,i);
+    catch(error){
+        console.log(error);
+        return false;
     }
 }
 
 
-export {fetchCityData}
+export {fetchCityData, getCityImage}
